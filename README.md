@@ -1,0 +1,1 @@
+# AdventOfCode2022Day2Part1
