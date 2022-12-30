@@ -1,14 +1,20 @@
 import spock.lang.Specification
 
 class GameSpecification extends Specification {
-    def "maximum of two numbers"(int a, int b, int c) {
+    def "score of two strings"(String a, String b, int c) {
         expect:
-        Math.max(a, b) == c
+        Game.getScore(a, b) == c
 
         where:
-        a | b | c
-        1 | 3 | 3
-        7 | 4 | 7
-        0 | 0 | 0
+        a   |  b  | c
+        "A" | "X" | 4
+        "A" | "Y" | 8
+        "A" | "Z" | 3
+        "B" | "X" | 1
+        "B" | "Y" | 6
+        "B" | "Z" | 9
+        "C" | "X" | 7
+        "C" | "Y" | 8
+        "C" | "Z" | 6
     }
 }

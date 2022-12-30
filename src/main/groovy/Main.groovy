@@ -2,7 +2,7 @@ static void main(String[] args) {
 
   String fileContents = new File('input').text
 
-  SantaList santaList = new SantaList(fileContents)
+  Game santaList = new Game(fileContents)
   List<Integer> list = santaList.getSortedList()
 
   def sumValue = 0
