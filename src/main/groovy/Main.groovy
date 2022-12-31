@@ -1,11 +1,9 @@
 static void main(String[] args) {
 
-  String fileContents = new File('input').text
+  File file = new File('input')
+  Integer result = 0
 
-  Game santaList = new Game(fileContents)
-  List<Integer> list = santaList.getSortedList()
+  file.eachLine {result += Game.getScore(it.split(" ")[0], it.split(" ")[1])}
 
-  def sumValue = 0
-  list.subList(0, 3).each {sumValue += it}
-  println("Sum ${sumValue}")
+  println("Sum ${result}")
 }
