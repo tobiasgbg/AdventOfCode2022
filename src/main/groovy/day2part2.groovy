@@ -23,6 +23,9 @@ static void main(String[] args) {
 }
 
 class Day2Part2Game {
+
+    private static List<String> selections = ["A", "B", "C"]
+
     static Integer getTotalScore(String opponent, String you) {
         return getGameScore(you) + getDerivedSelectionScore(opponent, you)
     }
@@ -43,17 +46,14 @@ class Day2Part2Game {
     }
 
     static Integer getSelectionScore(String selection) {
-        List<Integer> selections = ["A", "B", "C"]
         return selections.indexOf(selection) + 1
     }
 
     static String getWinningSelection(String opponent) {
-        List<Integer> selections = ["A", "B", "C"]
         return selections[ (selections.indexOf(opponent) + 1) % 3 ]
     }
 
     static String getLosingSelection(String opponent) {
-        List<Integer> selections = ["A", "B", "C"]
-        return selections[ (selections.indexOf(opponent) - 1) % 2 ]
+        return selections[ (selections.indexOf(opponent) - 1) % 3 ]
     }
 }
