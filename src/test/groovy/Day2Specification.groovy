@@ -19,18 +19,29 @@ class Day2Specification extends Specification {
     }
     def "score of two strings according to part 2 rules"(String a, String b, int c) {
         expect:
-        Day2Part2Game.getScore(a, b) == c
+        Day2Part2Game.getTotalScore(a, b) == c
 
         where:
         a   |  b  | c
         "A" | "X" | 3
-        "A" | "Y" | 1
+        "A" | "Y" | 4
         "A" | "Z" | 8
         "B" | "X" | 1
         "B" | "Y" | 5
         "B" | "Z" | 9
         "C" | "X" | 2
-        "C" | "Y" | 3
+        "C" | "Y" | 6
         "C" | "Z" | 7
+    }
+
+    def "score of selection"(String a, int b) {
+        expect:
+        Day2Part2Game.getSelectionScore(a) == b
+
+        where:
+        a   |  b
+        "A" | 1
+        "B" | 2
+        "C" | 3
     }
 }
