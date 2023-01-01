@@ -44,4 +44,37 @@ class Day2Specification extends Specification {
         "B" | 2
         "C" | 3
     }
+
+    def "score of outcome"(String a, int b) {
+        expect:
+        Day2Part2Game.getGameScore(a) == b
+
+        where:
+        a   |  b
+        "X" | 0
+        "Y" | 3
+        "Z" | 6
+    }
+
+    def "winning selection"(String a, String b) {
+        expect:
+        Day2Part2Game.getWinningSelection(a) == b
+
+        where:
+        a   |  b
+        "A" | "B"
+        "B" | "C"
+        "C" | "A"
+    }
+
+    def "losing selection"(String a, String b) {
+        expect:
+        Day2Part2Game.getLosingSelection(a) == b
+
+        where:
+        a   |  b
+        "A" | "C"
+        "B" | "A"
+        "C" | "B"
+    }
 }

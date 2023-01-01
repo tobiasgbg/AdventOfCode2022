@@ -28,12 +28,7 @@ class Day2Part2Game {
     }
 
     static Integer getGameScore(String you) {
-        if (you == "X")
-            return 0
-        else if (you == "Y")
-            return 3
-        else if (you == "Z")
-            return 6
+        return ["X": 0, "Y": 3, "Z": 6][you]
     }
 
     static Integer getDerivedSelectionScore(String opponent, String you) {
@@ -43,32 +38,22 @@ class Day2Part2Game {
             return getSelectionScore(opponent)
         else if (you == "Z")
             return getSelectionScore(getWinningSelection(opponent))
+
+        throw new UnsupportedOperationException()
     }
 
     static Integer getSelectionScore(String selection) {
-        if (selection == "A")
-            return 1
-        else if (selection == "B")
-            return 2
-        else if (selection == "C")
-            return 3
+        List<Integer> selections = ["A", "B", "C"]
+        return selections.indexOf(selection) + 1
     }
 
     static String getWinningSelection(String opponent) {
-        if (opponent == "A")
-            return "B"
-        else if (opponent == "B")
-            return "C"
-        else if (opponent == "C")
-            return "A"
+        List<Integer> selections = ["A", "B", "C"]
+        return selections[ (selections.indexOf(opponent) + 1) % 3 ]
     }
 
     static String getLosingSelection(String opponent) {
-        if (opponent == "A")
-            return "C"
-        else if (opponent == "B")
-            return "A"
-        else if (opponent == "C")
-            return "B"
+        List<Integer> selections = ["A", "B", "C"]
+        return selections[ (selections.indexOf(opponent) - 1) % 2 ]
     }
 }
