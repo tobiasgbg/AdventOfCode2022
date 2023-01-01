@@ -1,0 +1,36 @@
+import spock.lang.Specification
+
+class Day2Specification extends Specification {
+    def "score of two strings according to part 1 rules"(String a, String b, int c) {
+        expect:
+        Day2Part1Game.getScore(a, b) == c
+
+        where:
+        a   |  b  | c
+        "A" | "X" | 4
+        "A" | "Y" | 8
+        "A" | "Z" | 3
+        "B" | "X" | 1
+        "B" | "Y" | 5
+        "B" | "Z" | 9
+        "C" | "X" | 7
+        "C" | "Y" | 2
+        "C" | "Z" | 6
+    }
+    def "score of two strings according to part 2 rules"(String a, String b, int c) {
+        expect:
+        Day2Part2Game.getScore(a, b) == c
+
+        where:
+        a   |  b  | c
+        "A" | "X" | 3
+        "A" | "Y" | 1
+        "A" | "Z" | 8
+        "B" | "X" | 1
+        "B" | "Y" | 5
+        "B" | "Z" | 9
+        "C" | "X" | 2
+        "C" | "Y" | 3
+        "C" | "Z" | 7
+    }
+}
