@@ -11,6 +11,28 @@ class Day3Specification extends Specification {
         "acbc" | "ac" | "bc"
     }
 
+    def "getRepeatedChar"(String a, String b, String c) {
+        expect:
+        Backpack.getRepeatedChar(a,b) == c
+
+        where:
+        a     |  b    |  c
+        "A"   | "A"   | "A"
+        "bLw" | "wMf" | "w"
+        "kfO" | "OUg" | "O"
+    }
+
+    def "get value of repeated char"(String a, int b) {
+        expect:
+        Backpack.getValueOfRepeatedChar(a) == b
+
+        where:
+        a            | b
+        "LirfoLe"    | 38
+        "pp"         | 16
+        "ascdefghs"  | 20
+    }
+
     def "get character value"(String a, int b) {
         expect:
         Backpack.getValue(a) == b

@@ -36,7 +36,7 @@ static void main(String[] args) {
     File file = new File('../../../input/day3part1.txt')
     Integer result = 0
 
-    //file.eachLine {result += Backpack.getTotalScore(it.split(" ")[0], it.split(" ")[1])}
+    file.eachLine {result += Backpack.getValueOfRepeatedChar(it)}
 
     println("Sum ${result}")
 }
@@ -51,5 +51,22 @@ class Backpack {
 
     static def getValue(String character) {
         return (line.contains(character) ? 0 : 26) + line.indexOf(character.toLowerCase()) + 1
+    }
+
+    static def getRepeatedChar(String comp1, String comp2) {
+        for (t in comp1) {
+            if (comp2.contains(t))
+                return t
+        }
+
+        throw new UnsupportedOperationException()
+    }
+
+    static def getValueOfRepeatedChar(String input) {
+        def comp1
+        def comp2
+        (comp1, comp2) = getCompartments(input)
+        def repeatedChar = getRepeatedChar(comp1, comp2)
+        return getValue(repeatedChar)
     }
 }
