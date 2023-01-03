@@ -30,7 +30,7 @@ class Day3Specification extends Specification {
         a            | b
         "LirfoLe"    | 38
         "pp"         | 16
-        "ascdefghs"  | 20
+        "ascdefghs"  | 19
     }
 
     def "get character value"(String a, int b) {
