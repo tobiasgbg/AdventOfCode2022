@@ -1,3 +1,5 @@
+import com.github.javaparser.ast.Node
+
 /*
 --- Part Two ---
 As you finish identifying the misplaced items, the Elves come to you with another issue.
@@ -30,37 +32,15 @@ static void main(String[] args) {
     File file = new File('../../../input/day3part1.txt')
     Integer result = 0
 
-    file.eachLine {result += Backpack.getValueOfRepeatedChar(it)}
+    def line1, line2, line3
+    file.withReader { reader ->
+        while ((line1 = reader.readLine()) != null) {
+            line2 = reader.readLine()
+            line3 = reader.readLine()
+
+            result += Backpack.getValueOfCommonChar(line1, line2, line3)
+        }
+    }
 
     println("Sum ${result}")
-}
-
-class Day3Part2Backpack {
-
-    static String line = "abcdefghijklmnopqrstuvwxyz"
-
-    static def getCompartments(String input) {
-        return [input.substring(0, (int)(input.length()/2)), input.substring((int)(input.length()/2), input.length())]
-    }
-
-    static def getValue(String character) {
-        return (line.contains(character) ? 0 : 26) + line.indexOf(character.toLowerCase()) + 1
-    }
-
-    static def getRepeatedChar(String comp1, String comp2) {
-        for (t in comp1) {
-            if (comp2.contains(t))
-                return t
-        }
-
-        throw new UnsupportedOperationException()
-    }
-
-    static def getValueOfRepeatedChar(String input) {
-        def comp1
-        def comp2
-        (comp1, comp2) = getCompartments(input)
-        def repeatedChar = getRepeatedChar(comp1, comp2)
-        return getValue(repeatedChar)
-    }
 }

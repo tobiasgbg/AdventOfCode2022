@@ -69,4 +69,13 @@ class Backpack {
         def repeatedChar = getRepeatedChar(comp1, comp2)
         return getValue(repeatedChar)
     }
+
+    static def getValueOfCommonChar(String a, String b, String c) {
+        def commonChar = getCommonChar(a, b, c)
+        return getValue(commonChar)
+    }
+
+    static def getCommonChar(String a, String b,  String c) {
+        return a.find{b.contains(it) && c.contains(it)}
+    }
 }

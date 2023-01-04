@@ -46,4 +46,24 @@ class Day3Specification extends Specification {
         "t" | 20
         "s" | 19
     }
+
+    def "get common char"(String a, String b, String c, String d) {
+        expect:
+        Backpack.getCommonChar(a, b, c) == d
+
+        where:
+        a     |  b    |  c   |  d
+        "A"   | "A"   | "A"  | "A"
+        "bLw" | "wMf" | "wgd"| "w"
+    }
+
+    def "get value of common char"(String a, String b, String c, Integer d) {
+        expect:
+        Backpack.getValueOfCommonChar(a, b, c) == d
+
+        where:
+        a     |  b    |  c   |  d
+        "p"   | "p"   | "p"  | 16
+        "bLv" | "vMf" | "vgd"| 22
+    }
 }
