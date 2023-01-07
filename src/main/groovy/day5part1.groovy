@@ -25,21 +25,23 @@ class CrateStack {
         result
     }
 
-    static def moveCrates(List<String> stacks, String instruction) {
+    static def moveCrates(List<String> stacks, String instruction, boolean moveMultiple) {
         def instructionList = instruction.split(" ")
-        moveCrates(stacks, instructionList[1] as Integer, instructionList[3] as Integer, instructionList[5] as Integer)
+        moveCrates(stacks, instructionList[1] as Integer, instructionList[3] as Integer, instructionList[5] as Integer, moveMultiple)
     }
 
-    static def moveCrates(List<String> stacks, Integer noCratesToMove, Integer sourceStack, Integer targetStack) {
-        def stacksAfterMove= moveCrates(stacks[sourceStack - 1], stacks[targetStack - 1], noCratesToMove)
+    static def moveCrates(List<String> stacks, Integer noCratesToMove, Integer sourceStack, Integer targetStack, boolean moveMultiple) {
+        def stacksAfterMove= moveCrates(stacks[sourceStack - 1], stacks[targetStack - 1], noCratesToMove, moveMultiple)
         stacks[sourceStack - 1] = stacksAfterMove[0]
         stacks[targetStack - 1] = stacksAfterMove[1]
         stacks
     }
 
-    static def moveCrates(String sourceStack, String targetStack, Integer noCratesToMove) {
+    static def moveCrates(String sourceStack, String targetStack, Integer noCratesToMove, boolean moveMultiple = false) {
+        def crates = getTopCrates(sourceStack, noCratesToMove)
+        if (!moveMultiple) crates = crates.reverse()
         [removeCrates(sourceStack, noCratesToMove),
-                addCrates(targetStack, getTopCrates(sourceStack, noCratesToMove).reverse())]
+         addCrates(targetStack, crates)]
     }
 
     static def addCrates(String stack, String crates) {

@@ -74,6 +74,17 @@ class Day5Specification extends Specification {
         ["AB",""]  | "move 2 from 1 to 2"   | ["","BA"]
     }
 
+    def "move multile crates full instruction"(List<String> a, String b) {
+        expect:
+        CrateStack.moveCrates(a, b, true) == c
+
+        where:
+        a          |  b                     |  c
+        ["A",""]   | "move 1 from 1 to 2"   | ["","A"]
+        ["AB",""]  | "move 1 from 1 to 2"   | ["A","B"]
+        ["AB",""]  | "move 2 from 1 to 2"   | ["","AB"]
+    }
+
     def "moveCrates"(List<String> a, Integer b, Integer c, Integer d, List<String> e) {
         expect:
         CrateStack.moveCrates(a, b, c, d) == e
