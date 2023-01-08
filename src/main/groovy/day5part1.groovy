@@ -25,7 +25,7 @@ class CrateStack {
         result
     }
 
-    static def moveCrates(List<String> stacks, String instruction, boolean moveMultiple) {
+    static def moveCrates(List<String> stacks, String instruction, boolean moveMultiple = false) {
         def instructionList = instruction.split(" ")
         moveCrates(stacks, instructionList[1] as Integer, instructionList[3] as Integer, instructionList[5] as Integer, moveMultiple)
     }
