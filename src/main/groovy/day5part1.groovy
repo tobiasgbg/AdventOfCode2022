@@ -30,7 +30,7 @@ class CrateStack {
         moveCrates(stacks, instructionList[1] as Integer, instructionList[3] as Integer, instructionList[5] as Integer, moveMultiple)
     }
 
-    static def moveCrates(List<String> stacks, Integer noCratesToMove, Integer sourceStack, Integer targetStack, boolean moveMultiple) {
+    static def moveCrates(List<String> stacks, Integer noCratesToMove, Integer sourceStack, Integer targetStack, boolean moveMultiple = false) {
         def stacksAfterMove= moveCrates(stacks[sourceStack - 1], stacks[targetStack - 1], noCratesToMove, moveMultiple)
         stacks[sourceStack - 1] = stacksAfterMove[0]
         stacks[targetStack - 1] = stacksAfterMove[1]

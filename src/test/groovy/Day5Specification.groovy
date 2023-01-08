@@ -60,7 +60,7 @@ class Day5Specification extends Specification {
         a     |  b     |  c | d   |  e
         "A"   | ""     |  1 | ""  | "A"
         "AB"  | "A"    |  1 | "A" | "AB"
-        "ABC" | "F"    |  2 | "A" | "FBC"
+        "ABC" | "F"    |  2 | "A" | "FCB"
     }
 
     def "move crates full instruction"(List<String> a, String b) {
@@ -74,7 +74,7 @@ class Day5Specification extends Specification {
         ["AB",""]  | "move 2 from 1 to 2"   | ["","BA"]
     }
 
-    def "move multile crates full instruction"(List<String> a, String b) {
+    def "move multiple crates full instruction"(List<String> a, String b) {
         expect:
         CrateStack.moveCrates(a, b, true) == c
 
@@ -85,7 +85,7 @@ class Day5Specification extends Specification {
         ["AB",""]  | "move 2 from 1 to 2"   | ["","AB"]
     }
 
-    def "moveCrates"(List<String> a, Integer b, Integer c, Integer d, List<String> e) {
+    def "move crates arguments"(List<String> a, Integer b, Integer c, Integer d, List<String> e) {
         expect:
         CrateStack.moveCrates(a, b, c, d) == e
 
