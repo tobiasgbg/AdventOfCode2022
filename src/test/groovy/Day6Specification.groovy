@@ -13,6 +13,28 @@ class Day6Specification extends Specification {
         "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"  | 11
     }
 
+    def "get pos of first marker long seq"(String a, Integer b) {
+        expect:
+        DataStream.getPosOfFirstMarker(a, 14) == b
+
+        where:
+        a      | b
+        "mjqjpqmgbljsphdztnvjfqwrcgsmlb"     | 19
+        "bvwbjplbgvbhsrlpgdmjqwftvncz"       | 23
+        "nppdvjthqldpwncqszvftbrmjlhg"       | 23
+        "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg"  | 29
+    }
+
+    def "is marker"(String a, boolean b) {
+        expect:
+        DataStream.isMarker(a) == b
+
+        where:
+        a      | b
+        "bvwb" | false
+        "pdvj" | true
+    }
+
     def "is marker"(String a, boolean b) {
         expect:
         DataStream.isMarker(a) == b

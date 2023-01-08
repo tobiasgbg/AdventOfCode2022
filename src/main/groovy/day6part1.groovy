@@ -8,10 +8,10 @@ static void main(String[] args) {
 }
 
 class DataStream {
-    static def getPosOfFirstMarker(String data) {
+    static def getPosOfFirstMarker(String data, int repCharCount = 4) {
         int index
-        for (index = 4; index < data.length(); index++) {
-            if (isMarker(data.substring(index-4, index))) break
+        for (index = repCharCount; index < data.length(); index++) {
+            if (isMarker(data.substring(index-repCharCount, index))) break
         }
         index
     }
