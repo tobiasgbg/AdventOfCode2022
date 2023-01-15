@@ -40,8 +40,7 @@ class CrateStack {
     static def moveCrates(String sourceStack, String targetStack, Integer noCratesToMove, boolean moveMultiple = false) {
         def crates = getTopCrates(sourceStack, noCratesToMove)
         if (!moveMultiple) crates = crates.reverse()
-        [removeCrates(sourceStack, noCratesToMove),
-         addCrates(targetStack, crates)]
+        [removeCrates(sourceStack, noCratesToMove), addCrates(targetStack, crates)]
     }
 
     static def addCrates(String stack, String crates) {

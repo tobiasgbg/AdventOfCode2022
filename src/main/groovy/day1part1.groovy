@@ -41,7 +41,7 @@ Find the Elf carrying the most Calories. How many total Calories is that Elf car
 
 static void main(String[] args) {
 
-    String fileContents = new File('../../../input/day1part1.txt').text
+    String fileContents = new File('../../../input/day1.txt').text
 
     Day1Part1SantaList santaList = new Day1Part1SantaList(fileContents)
     List list = santaList.getList()
