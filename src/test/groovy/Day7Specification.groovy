@@ -4,12 +4,13 @@ import spock.lang.Specification
 class Day7Specification extends Specification {
     def "check that we can read raw instruction data"() {
     given:
-        String rawInstructionsData = """\$ cd /\r\n\$ls\r\n14848514 b.txt\r\n"""
+        String rawInstructionsData = """\$ cd /\r\n\$ ls\r\n14848514 b.txt\r\n"""
 
     when:
         List<String> instructions = Instructions.getInstructions(rawInstructionsData)
-        print instructions
+        println "instructions = " + instructions
         List<Integer> directories = Instructions.getSizeOfDirectories(instructions)
+        println "directories = " + directories
 
     then:
         directories == [14848514]
@@ -39,8 +40,10 @@ class Day7Specification extends Specification {
         Instructions.getDirectoryInformation(a) == b
 
         where:
-        a                              | b
-        ['cd /', 'ls','122 b']         | [[name:'/', size:122]]
+        a                                                             | b
+        ['cd /', 'ls','122 b']                                        | [[name:'/', size:122]]
+        ['cd /', 'ls','dir a','122 b']                                | [[name:'/', size:122]]
+        ['cd /', 'ls','dir a','122 b', 'cd a', 'ls', '111 g']         | [[name:'/', size:122], [name:'/a', size: 111]]
     }
 
     def "get files in directory"(List<String> a, List<String> b) {
@@ -52,7 +55,17 @@ class Day7Specification extends Specification {
         ["122 b"]                                   | ["122 b"]
         ["122 b", "111 a"]                          | ["122 b", "111 a"]
         ["122 b", "111 a", "\$ cd a"]               | ["122 b", "111 a"]
-        ["122 b", "111 a", "\$ cd a", "123 c"]      | ["122 b", "111 a"]
+        ["122 b", "111 a", "\$ cd a", "\$ ls", "123 c"]      | ["122 b", "111 a"]
+    }
+
+    def "join path"(List<String> a, String b) {
+        expect:
+        Instructions.getPathAsString(a) == b
+
+        where:
+        a                                           | b
+        ["/"]                                       | "/"
+        ["/", "a"]                                  | "/a"
     }
 
     def "get size of files in directory"(List<String> a, Integer b) {
