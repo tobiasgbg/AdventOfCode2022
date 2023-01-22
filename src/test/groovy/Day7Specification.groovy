@@ -9,7 +9,7 @@ class Day7Specification extends Specification {
     when:
         List<String> instructions = Instructions.getInstructions(rawInstructionsData)
         println "instructions = " + instructions
-        List<Integer> directories = Instructions.getSizeOfDirectories(instructions)
+        List<Integer> directories = Instructions.getTotalSizeOfDirectories(instructions)
         println "directories = " + directories
 
     then:
@@ -22,7 +22,7 @@ class Day7Specification extends Specification {
 
         where:
         a                                      | b
-        '$ cd /\r\n$ ls\r\n14848514 b.txt\r\n' | ['$ cd /', '$ ls', '14848514 b.txt']
+        '$ cd /\r\n$ ls\r\n14848514 b.txt\r\n' | ['cd /', 'ls', '14848514 b.txt']
     }
 
     def "size of dir"(List<String> a, Integer b) {
@@ -33,6 +33,16 @@ class Day7Specification extends Specification {
         a                                 | b
         ["122 b"]                         | 122
         ["122 b", "111 a"]                | 233
+    }
+
+    def "get total size on drive"(List<String> a, Integer b) {
+        expect:
+        Instructions.getSizeOnDrive(a) == b
+
+        where:
+        a                                 | b
+        [12]                              | 12
+        [13, 12]                          | 13
     }
 
     def "get size of sub dirs"(String a, List<Map> b, Integer c) {

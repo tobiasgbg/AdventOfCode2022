@@ -4,8 +4,18 @@ static void main(String[] args) {
 
     List<String> instructions = Instructions.getInstructions file.text
     List<Integer> directories = Instructions.getTotalSizeOfDirectories instructions
-    List<Integer> sortedDirectories = directories.sort()
-    println sortedDirectories.findAll{it < 100000}.sum()
+    Integer spaceNeeded = 30000000 - (70000000 - Instructions.getSizeOnDrive(directories))
+    println spaceNeeded
+    println directories
+    println "Part 1: " + directories.sort().findAll{it < 100000}.sum()
+
+    println directories
+    for (directory in directories) {
+        if (directory >= spaceNeeded) {
+            println "Part 2: " + directory
+            break
+        }
+    }
 }
 
 class Instructions {
@@ -99,5 +109,9 @@ class Instructions {
             result += it.startsWith('\$') ? it.substring(2, it.size()) : it
         }
         result
+    }
+
+    static def getSizeOnDrive(List<Integer> directories) {
+        directories[0]
     }
 }
