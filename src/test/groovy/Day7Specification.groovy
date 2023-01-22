@@ -35,6 +35,15 @@ class Day7Specification extends Specification {
         ["122 b", "111 a"]                | 233
     }
 
+    def "get size of sub dirs"(String a, List<Map> b, Integer c) {
+        expect:
+        Instructions.getSizeOfSubDirectories(a, b) == c
+
+        where:
+        a    | b                                                             | c
+        "/"  | [[name:'/', size:122], [name:'/a', size: 111]]                | 111
+    }
+
     def "get dir information"(List<String> a, List<Map> b) {
         expect:
         Instructions.getDirectoryInformation(a) == b
@@ -44,6 +53,26 @@ class Day7Specification extends Specification {
         ['cd /', 'ls','122 b']                                        | [[name:'/', size:122]]
         ['cd /', 'ls','dir a','122 b']                                | [[name:'/', size:122]]
         ['cd /', 'ls','dir a','122 b', 'cd a', 'ls', '111 g']         | [[name:'/', size:122], [name:'/a', size: 111]]
+    }
+
+    def "get size of dirs"(List<String> a, List<Map> b) {
+        expect:
+        Instructions.getSizeOfDirectories(a) == b
+
+        where:
+        a                                                                                        | b
+        ["\$ cd /", "\$ ls", "14848514 b.txt"]                                                   | [14848514]
+        ["\$ cd /", "\$ ls", "14848514 b.txt", "dir b", "\$ cd b", "\$ ls", "14848514 a.txt"]    | [14848514, 14848514]
+    }
+
+    def "get total size of dirs"(List<String> a, List<Map> b) {
+        expect:
+        Instructions.getTotalSizeOfDirectories(a) == b
+
+        where:
+        a                                                                                        | b
+        ["cd /", "ls", "14848514 b.txt"]                                                   | [14848514]
+        ["cd /", "ls", "14848514 b.txt", "dir b", "cd b", "ls", "14848514 a.txt"]    | [29697028, 14848514]
     }
 
     def "get files in directory"(List<String> a, List<String> b) {
