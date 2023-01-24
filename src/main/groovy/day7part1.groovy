@@ -5,11 +5,8 @@ static void main(String[] args) {
     List<String> instructions = Instructions.getInstructions file.text
     List<Integer> directories = Instructions.getTotalSizeOfDirectories instructions
     Integer spaceNeeded = 30000000 - (70000000 - Instructions.getSizeOnDrive(directories))
-    println spaceNeeded
-    println directories
     println "Part 1: " + directories.sort().findAll{it < 100000}.sum()
 
-    println directories
     for (directory in directories) {
         if (directory >= spaceNeeded) {
             println "Part 2: " + directory
@@ -64,9 +61,8 @@ class Instructions {
             def instruction = instructions[i]
             if (instruction.startsWith('cd ..'))
                 path.removeLast()
-            else if (instruction.startsWith('cd')) {
+            else if (instruction.startsWith('cd'))
                 path.add(instruction.split(' ')[1] as String)
-            }
             else if (instruction.startsWith('ls'))
                 dirListingStarted = true
             else if (dirListingStarted) {
@@ -95,7 +91,7 @@ class Instructions {
             def first= instruction.split(" ").first()
             if (first.isInteger())
                 files += instruction
-            else if (instruction.startsWith('dir') || instruction.startsWith("\$ ls"))
+            else if (instruction.startsWith('cd') || instruction.startsWith("\$ ls"))
                 continue
             else
                 break
