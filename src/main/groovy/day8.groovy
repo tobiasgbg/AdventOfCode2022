@@ -3,7 +3,8 @@ static void main(String[] args) {
     File file = new File('../../../input/day8.txt')
 
     List<List<Integer>> forest = Forest.parse file.text
-    println "Number of visible trees: " + Forest.getNumVisibleTrees(forest)
+    println "Part 1 - Number of visible trees: " + Forest.getNumVisibleTrees(forest)
+    println "Part 2 - Max scenic score: " + Forest.getMaxScenicScore(forest)
 
 }
 class Forest {
@@ -69,5 +70,51 @@ class Forest {
             }
         }
         result
+    }
+
+    static Integer getScenicScoreOfDirection(List<List<Integer>> forest, int row, int column, String direction) {
+        def nextRow = row
+        def nextColumn = column
+        def scenicScore = 0
+        while (true) {
+            if (direction == "N")
+                nextRow--
+            else if (direction == "S")
+                nextRow++
+            else if (direction == "W")
+                nextColumn--
+            else if (direction == "E")
+                nextColumn++
+
+            scenicScore++
+
+            if (nextRow <= 0 || nextRow >= forest.size() - 1 || nextColumn <= 0 || nextColumn >= forest[0].size() - 1)
+                break
+
+            if (getTreeAtPosition(forest, row, column) <= getTreeAtPosition(forest, nextRow, nextColumn))
+                break
+        }
+        scenicScore
+    }
+
+    static Integer getScenicScore(List<List<Integer>> forest, int row, int column) {
+        Integer scenicScore = 1
+        for (direction in ['N','W','E','S'])
+            scenicScore *= getScenicScoreOfDirection(forest, row, column, direction)
+        scenicScore
+    }
+
+    static Integer getMaxScenicScore(List<List<Integer>> forest) {
+        Integer maxScenicScore = 0
+        for (Integer row = 0; row < forest[0].size(); row++) {
+            for (Integer column = 0; column < forest.size(); column++) {
+                Integer scenicScore = getScenicScore(forest, row, column)
+                if (scenicScore > maxScenicScore) {
+                    maxScenicScore = scenicScore
+                }
+            }
+        }
+
+        maxScenicScore
     }
 }
