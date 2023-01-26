@@ -91,7 +91,7 @@ class Instructions {
             def first= instruction.split(" ").first()
             if (first.isInteger())
                 files += instruction
-            else if (instruction.startsWith('cd') || instruction.startsWith("\$ ls"))
+            else if (instruction.startsWith('cd') || instruction.startsWith("\$ ls") || instruction.startsWith("dir"))
                 continue
             else
                 break
